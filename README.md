@@ -14,3 +14,5 @@ Python で OS 非依存のプログラムですが、Windows のインストー�
 大規模言語モデルのAPIキーが実行するには必要です。以下の場所で手に入ります。
 - https://aistudio.google.com/app/apikey
 - https://platform.openai.com/api-keys
+
+ソースコードから実行する場合は [uv](https://docs.astral.sh/uv/) をインストールして `uv run src/app.py` で実行できます。

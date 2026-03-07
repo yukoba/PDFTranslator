@@ -3,7 +3,8 @@ import io
 from typing import Optional, Literal
 
 from PIL import Image
-from google import genai  # type: ignore
+from google import genai
+from google.genai.types import ThinkingLevel
 from openai import OpenAI
 
 ModelType = Literal["gemini-3-flash-preview", "gpt-5-mini"]
@@ -82,7 +83,10 @@ class Translator:
         return str(response.choices[0].message.content or "")
 
     def _translate_with_gemini(self, image: Image.Image, prompt: str) -> str:
-        response = self.client.models.generate_content(  # type: ignore  # type: ignore
-            model="gemini-3-flash-preview", contents=[prompt, image]
+        response = self.client.models.generate_content(  # type: ignore
+            model="gemini-3-flash-preview", contents=[prompt, image],
+            config=genai.types.GenerateContentConfig(
+                thinking_config=genai.types.ThinkingConfig(thinking_level=ThinkingLevel.LOW)
+            ),
         )
         return str(response.text)

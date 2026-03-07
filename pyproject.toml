@@ -1,6 +1,6 @@
 [project]
 name = "pdftranslator"
-version = "1.0.0"
+version = "1.1.0"
 description = "PDFを英語から日本語に翻訳"
 readme = "README.md"
 requires-python = "==3.12.*"

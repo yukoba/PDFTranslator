@@ -9,9 +9,7 @@ from src.config_manager import ConfigManager, APP_NAME
 @pytest.fixture
 def mock_config_dir(tmp_path):
     """Fixture to provide a temporary directory for config testing."""
-    with patch(
-            "src.config_manager.ConfigManager._get_config_dir", return_value=tmp_path
-    ):
+    with patch("src.config_manager.ConfigManager._get_config_dir", return_value=tmp_path):
         yield tmp_path
 
 
@@ -60,7 +58,7 @@ def test_get_api_key(mock_get_password, mock_config_dir):
     key = config.get_api_key("gpt-5-mini")
 
     assert key == "my_secret_key"
-    mock_get_password.assert_called_once_with(APP_NAME, "gpt-5-mini")
+    mock_get_password.assert_called_once_with(APP_NAME, "OpenAI")
 
 
 @patch("src.config_manager.keyring.set_password")
@@ -68,6 +66,4 @@ def test_set_api_key(mock_set_password, mock_config_dir):
     config = ConfigManager()
     config.set_api_key("gemini-3-flash-preview", "new_secret_key")
 
-    mock_set_password.assert_called_once_with(
-        APP_NAME, "gemini-3-flash-preview", "new_secret_key"
-    )
+    mock_set_password.assert_called_once_with(APP_NAME, "Gemini", "new_secret_key")

@@ -64,24 +64,34 @@ class ConfigManager:
 
     # --- Secure API Key Management ---
 
+    def _get_provider_name(self, model_name: str) -> str:
+        if model_name.startswith("gpt-"):
+            return "OpenAI"
+        elif model_name.startswith("gemini-"):
+            return "Gemini"
+        return model_name
+
     def get_api_key(self, model_name: str) -> Optional[str]:
         """Retrieves the API key securely from the OS keyring."""
+        provider = self._get_provider_name(model_name)
         try:
-            return keyring.get_password(APP_NAME, model_name)
+            return keyring.get_password(APP_NAME, provider)
         except Exception:
             # Handle keyring backend errors gracefully
             return None
 
     def set_api_key(self, model_name: str, api_key: str):
         """Saves the API key securely using the OS keyring."""
+        provider = self._get_provider_name(model_name)
         try:
-            keyring.set_password(APP_NAME, model_name, api_key)
+            keyring.set_password(APP_NAME, provider, api_key)
         except Exception as e:
             print(f"Warning: Failed to save API key securely: {e}")
 
     def delete_api_key(self, model_name: str):
         """Deletes the API key from the OS keyring."""
+        provider = self._get_provider_name(model_name)
         try:
-            keyring.delete_password(APP_NAME, model_name)
+            keyring.delete_password(APP_NAME, provider)
         except Exception:
             pass  # Ignore if it doesn't exist

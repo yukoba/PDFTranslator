@@ -1,0 +1,15 @@
+[project]
+name = "pdftranslator"
+version = "0.1.0"
+description = "PDFを英語から日本語に翻訳"
+readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "customtkinter>=5.2.2",
+    "google-generativeai>=0.8.6",
+    "keyring>=25.7.0",
+    "openai>=2.26.0",
+    "pillow>=12.1.1",
+    "pyinstaller>=6.19.0",
+    "pymupdf>=1.27.1",
+]

@@ -4,9 +4,9 @@ from tkinter import filedialog, messagebox
 
 import customtkinter as ctk
 
-from src.config_manager import ConfigManager
-from src.pdf_processor import PDFProcessor
-from src.translator import Translator
+from config_manager import ConfigManager
+from pdf_processor import PDFProcessor
+from translator import Translator
 
 ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")

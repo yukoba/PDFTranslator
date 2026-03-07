@@ -3,7 +3,7 @@ import os
 import fitz
 import pytest
 
-from src.pdf_processor import PDFProcessor
+from pdf_processor import PDFProcessor
 
 
 @pytest.fixture

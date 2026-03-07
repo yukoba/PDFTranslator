@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 import fitz  # PyMuPDF
 import pytest
 
-from src.translator import Translator
+from translator import Translator
 
 
 # Create a simple dummy PDF for testing
@@ -25,7 +25,7 @@ def test_translator_init_invalid_model():
         Translator(model_type="invalid-model", api_key="test_key")  # type: ignore
 
 
-@patch("src.translator.OpenAI")
+@patch("translator.OpenAI")
 def test_translator_gpt_call(mock_openai, dummy_pdf):
     # Setup mock
     mock_client = MagicMock()
@@ -52,7 +52,7 @@ def test_translator_gpt_call(mock_openai, dummy_pdf):
     )
 
 
-@patch("src.translator.genai.Client")
+@patch("translator.genai.Client")
 def test_translator_gemini_call(mock_genai_client, dummy_pdf):
     # Setup mock
     mock_client_instance = MagicMock()

@@ -35,7 +35,7 @@ class ConfigManager:
             "last_opened_folder": "",
             "source_language": "English",
             "target_language": "Japanese",
-            "selected_model": "gpt-5-mini",
+            "selected_model": "gemini-3-flash-preview",
         }
 
         if self.config_path.exists():

@@ -8,7 +8,7 @@ from src.config_manager import ConfigManager
 from src.pdf_processor import PDFProcessor
 from src.translator import Translator
 
-ctk.set_appearance_mode("System")
+ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")
 
 
@@ -17,7 +17,7 @@ class PDFTranslatorApp(ctk.CTk):
         super().__init__()
 
         self.title("PDF Translator")
-        self.geometry("650x600")
+        self.geometry("620x500")
 
         self.config_manager = ConfigManager()
 

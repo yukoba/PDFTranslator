@@ -2,7 +2,6 @@
 
 Windows 11側
 ```bat
-uv venv .venv-win
 set UV_PROJECT_ENVIRONMENT=.venv-win
 uv sync
 ```

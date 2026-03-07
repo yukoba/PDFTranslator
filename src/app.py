@@ -299,14 +299,14 @@ class PDFTranslatorApp(ctk.CTk):
                     0, self.status_var.set, f"Processing {pages_to_process} pages..."
                 )
 
-                for page_num, image in proc.extract_pages_as_images(
+                for page_num, pdf_bytes in proc.extract_pages_as_pdfs(
                         start_page, actual_end_page
                 ):
                     self.after(0, self._log_message, f"Translating page {page_num}...")
 
                     try:
                         translated_markdown = translator.translate_page(
-                            image,
+                            pdf_bytes,
                             target_language=target_lang,
                             previous_context=previous_context,
                         )

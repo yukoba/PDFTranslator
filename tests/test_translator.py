@@ -1,20 +1,23 @@
 from unittest.mock import patch, MagicMock
 
+import fitz  # PyMuPDF
 import pytest
-from PIL import Image
 
 from src.translator import Translator
 
 
-# Create a simple dummy image for testing
-def create_dummy_image():
-    img = Image.new("RGB", (100, 100), color="white")
-    return img
+# Create a simple dummy PDF for testing
+def create_dummy_pdf() -> bytes:
+    doc = fitz.open()
+    doc.new_page()
+    pdf_bytes = doc.write()
+    doc.close()
+    return pdf_bytes
 
 
 @pytest.fixture
-def dummy_image():
-    return create_dummy_image()
+def dummy_pdf():
+    return create_dummy_pdf()
 
 
 def test_translator_init_invalid_model():
@@ -23,7 +26,7 @@ def test_translator_init_invalid_model():
 
 
 @patch("src.translator.OpenAI")
-def test_translator_gpt_call(mock_openai, dummy_image):
+def test_translator_gpt_call(mock_openai, dummy_pdf):
     # Setup mock
     mock_client = MagicMock()
     mock_openai.return_value = mock_client
@@ -33,7 +36,7 @@ def test_translator_gpt_call(mock_openai, dummy_image):
 
     # Initialize and translate
     translator = Translator(model_type="gpt-5-mini", api_key="test_key")
-    result = translator.translate_page(dummy_image, target_language="Japanese")
+    result = translator.translate_page(dummy_pdf, target_language="Japanese")
 
     # Assertions
     assert result == "This is a mock translation from GPT."
@@ -43,11 +46,14 @@ def test_translator_gpt_call(mock_openai, dummy_image):
     call_args = mock_client.chat.completions.create.call_args[1]
     messages = call_args["messages"]
     assert len(messages) == 1
-    assert ("指定された翻訳先の言語（Japanese）に翻訳してください。" in messages[0]["content"][0]["text"])
+    assert (
+            "指定された翻訳先の言語（Japanese）に翻訳してください。"
+            in messages[0]["content"][0]["text"]
+    )
 
 
 @patch("src.translator.genai.Client")
-def test_translator_gemini_call(mock_genai_client, dummy_image):
+def test_translator_gemini_call(mock_genai_client, dummy_pdf):
     # Setup mock
     mock_client_instance = MagicMock()
     mock_genai_client.return_value = mock_client_instance
@@ -57,7 +63,7 @@ def test_translator_gemini_call(mock_genai_client, dummy_image):
 
     # Initialize and translate
     translator = Translator(model_type="gemini-3-flash-preview", api_key="test_key")
-    result = translator.translate_page(dummy_image, target_language="English")
+    result = translator.translate_page(dummy_pdf, target_language="English")
 
     # Assertions
     assert result == "This is a mock translation from Gemini."

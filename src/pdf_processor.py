@@ -1,7 +1,6 @@
-import io
+from typing import Optional
 
 import fitz  # PyMuPDF
-from PIL import Image
 
 
 class PDFProcessor:
@@ -22,9 +21,9 @@ class PDFProcessor:
             raise RuntimeError("PDF document is not opened. Use 'with' statement.")
         return len(self.doc)
 
-    def extract_page_as_image(self, page_number: int, dpi: int = 300) -> Image.Image:
+    def extract_page_as_pdf(self, page_number: int) -> bytes:
         """
-        Extract a specific page from the PDF as a PIL Image.
+        Extract a specific page from the PDF as PDF bytes.
         page_number is 1-indexed.
         """
         if not self.doc:
@@ -35,24 +34,17 @@ class PDFProcessor:
                 f"Invalid page number {page_number}. Must be between 1 and {len(self.doc)}."
             )
 
-        page = self.doc[page_number - 1]  # 0-indexed in PyMuPDF
+        new_doc = fitz.open()
+        new_doc.insert_pdf(self.doc, from_page=page_number - 1, to_page=page_number - 1)
+        pdf_bytes = new_doc.write()
+        new_doc.close()
+        return pdf_bytes
 
-        # Calculate matrix for specified DPI (default is 72)
-        zoom = dpi / 72.0
-        mat = fitz.Matrix(zoom, zoom)
-
-        pix = page.get_pixmap(matrix=mat)
-
-        # Convert to PIL Image
-        img_data = pix.tobytes("png")
-        image = Image.open(io.BytesIO(img_data))
-        return image
-
-    def extract_pages_as_images(
-            self, start_page: int = 1, end_page: int = None, dpi: int = 300
+    def extract_pages_as_pdfs(
+            self, start_page: int = 1, end_page: Optional[int] = None
     ):
         """
-        Generator that yields (page_number, PIL.Image) for the specified range.
+        Generator that yields (page_number, pdf_bytes) for the specified range.
         """
         if not self.doc:
             raise RuntimeError("PDF document is not opened. Use 'with' statement.")
@@ -61,4 +53,4 @@ class PDFProcessor:
             end_page = len(self.doc)
 
         for page_num in range(start_page, end_page + 1):
-            yield page_num, self.extract_page_as_image(page_num, dpi=dpi)
+            yield page_num, self.extract_page_as_pdf(page_num)

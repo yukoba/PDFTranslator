@@ -31,18 +31,19 @@ def test_get_page_count(dummy_pdf_path):
         assert proc.get_page_count() == 2
 
 
-def test_extract_page_as_image(dummy_pdf_path):
+def test_extract_page_as_pdf(dummy_pdf_path):
     processor = PDFProcessor(dummy_pdf_path)
     with processor as proc:
-        img1 = proc.extract_page_as_image(1)
-        assert img1 is not None
-        assert img1.format == "PNG"
+        pdf_bytes = proc.extract_page_as_pdf(1)
+        assert pdf_bytes is not None
+        assert isinstance(pdf_bytes, bytes)
+        assert pdf_bytes.startswith(b"%PDF")
 
 
-def test_extract_pages_as_images(dummy_pdf_path):
+def test_extract_pages_as_pdfs(dummy_pdf_path):
     processor = PDFProcessor(dummy_pdf_path)
     with processor as proc:
-        pages = list(proc.extract_pages_as_images())
+        pages = list(proc.extract_pages_as_pdfs())
         assert len(pages) == 2
         assert pages[0][0] == 1
         assert pages[1][0] == 2

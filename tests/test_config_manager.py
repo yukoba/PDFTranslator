@@ -19,7 +19,7 @@ def test_config_initialization_defaults(mock_config_dir):
     config = ConfigManager()
     assert config.get("source_language") == "English"
     assert config.get("target_language") == "Japanese"
-    assert config.get("selected_model") == "gpt-5-mini"
+    assert config.get("selected_model") == "gemini-3-flash-preview"
     assert config.get("last_opened_folder") == ""
     assert mock_config_dir.exists()
     assert (mock_config_dir / "config.json").exists() == False  # Only saved when changed

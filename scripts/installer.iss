@@ -1,6 +1,6 @@
 [Setup]
 AppName=PDF Translator
-AppVersion=1.1.0
+AppVersion=1.2.0
 DefaultDirName={autopf}\PDFTranslator
 DefaultGroupName=PDF Translator
 OutputDir=.\dist\installer

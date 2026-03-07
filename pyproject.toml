@@ -6,15 +6,20 @@ readme = "README.md"
 requires-python = "==3.12.*"
 dependencies = [
     "customtkinter>=5.2.2",
+    "google-genai>=1.66.0",
     "google-generativeai>=0.8.6",
     "keyring>=25.7.0",
     "openai>=2.26.0",
     "pillow>=12.1.1",
     "pyinstaller>=6.19.0",
     "pymupdf>=1.27.1",
-    "pytest>=9.0.2",
 ]
 
 [tool.pytest.ini_options]
 pythonpath = "src"
 testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]

@@ -1,8 +1,9 @@
 import json
 import os
-import keyring
 from pathlib import Path
 from typing import Dict, Any, Optional
+
+import keyring
 
 APP_NAME = "PDFTranslator"
 CONFIG_FILE_NAME = "config.json"

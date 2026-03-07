@@ -17,6 +17,8 @@ def build_app():
         "--windowed",  # Don't open console window on Windows
         "--noconfirm",  # Overwrite existing build
         "--clean",
+        "--paths",
+        "src",
         "--add-data",
         f"src{os.pathsep}src",  # Include src folder
         "src/app.py",

@@ -17,7 +17,7 @@ class PDFTranslatorApp(ctk.CTk):
         super().__init__()
 
         self.title("PDF Translator")
-        self.geometry("620x500")
+        self.geometry("700x500")
 
         self.config_manager = ConfigManager()
 

@@ -15,7 +15,6 @@ def mock_config_dir(tmp_path):
 
 def test_config_initialization_defaults(mock_config_dir):
     config = ConfigManager()
-    assert config.get("source_language") == "English"
     assert config.get("target_language") == "Japanese"
     assert config.get("selected_model") == "gemini-3-flash-preview"
     assert config.get("last_opened_folder") == ""
@@ -48,7 +47,7 @@ def test_config_load_existing(mock_config_dir):
     config = ConfigManager()
     assert config.get("last_opened_folder") == "/path/to/my/docs"
     # Defaults should still be present for missing keys
-    assert config.get("source_language") == "English"
+    assert config.get("target_language") == "Japanese"
 
 
 @patch("config_manager.keyring.get_password")

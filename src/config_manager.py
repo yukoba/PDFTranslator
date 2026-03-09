@@ -34,7 +34,6 @@ class ConfigManager:
     def _load_config(self) -> Dict[str, Any]:
         default_config = {
             "last_opened_folder": "",
-            "source_language": "English",
             "target_language": "Japanese",
             "selected_model": "gemini-3-flash-preview",
         }

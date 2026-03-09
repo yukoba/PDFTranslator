@@ -50,23 +50,14 @@ class PDFTranslatorApp(ctk.CTk):
         self.lang_frame = ctk.CTkFrame(self)
         self.lang_frame.pack(pady=10, padx=20, fill="x")
 
-        self.src_lang_label = ctk.CTkLabel(self.lang_frame, text="Source Language:")
-        self.src_lang_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
-
-        self.src_lang_var = ctk.StringVar(value="English")
-        self.src_lang_menu = ctk.CTkOptionMenu(
-            self.lang_frame, variable=self.src_lang_var, values=["English", "Japanese"]
-        )
-        self.src_lang_menu.grid(row=0, column=1, padx=10, pady=5, sticky="w")
-
         self.tgt_lang_label = ctk.CTkLabel(self.lang_frame, text="Target Language:")
-        self.tgt_lang_label.grid(row=0, column=2, padx=10, pady=5, sticky="e")
+        self.tgt_lang_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.tgt_lang_var = ctk.StringVar(value="Japanese")
         self.tgt_lang_menu = ctk.CTkOptionMenu(
             self.lang_frame, variable=self.tgt_lang_var, values=["Japanese", "English"]
         )
-        self.tgt_lang_menu.grid(row=0, column=3, padx=10, pady=5, sticky="w")
+        self.tgt_lang_menu.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
         # 3. Page Range
         self.page_frame = ctk.CTkFrame(self)
@@ -163,7 +154,6 @@ class PDFTranslatorApp(ctk.CTk):
         self.status_label.pack(side="left", padx=10)
 
     def _load_config(self):
-        self.src_lang_var.set(self.config_manager.get("source_language", "English"))
         self.tgt_lang_var.set(self.config_manager.get("target_language", "Japanese"))
 
         saved_model = self.config_manager.get("selected_model", "gpt-5-mini")
@@ -179,7 +169,6 @@ class PDFTranslatorApp(ctk.CTk):
             self.api_key_var.set("")
 
     def _save_current_config(self):
-        self.config_manager.set("source_language", self.src_lang_var.get())
         self.config_manager.set("target_language", self.tgt_lang_var.get())
 
         current_model = self.model_var.get()

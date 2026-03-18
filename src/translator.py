@@ -5,7 +5,7 @@ from google import genai
 from google.genai.types import ThinkingLevel, Part
 from openai import OpenAI
 
-ModelType = Literal["gemini-3-flash-preview", "gpt-5-mini"]
+ModelType = Literal["gemini-3-flash-preview", "gpt-5.4-mini"]
 
 
 class Translator:
@@ -28,6 +28,9 @@ class Translator:
             "出力はMarkdown形式とし、見出し、段落、箇条書き、数式、表などの論理構造を可能な限り維持してください。"
             "応答には翻訳結果だけを含めてください。"
         )
+
+        if self.model_type.startswith("gpt-"):
+            base_prompt += "Markdown内のTeXは $...$ で囲んでください。"
 
         if previous_context:
             base_prompt += (
@@ -56,7 +59,7 @@ class Translator:
         base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
 
         response = self.client.chat.completions.create(  # type: ignore
-            model="gpt-5-mini",
+            model="gpt-5.4-mini",
             messages=[
                 {
                     "role": "user",

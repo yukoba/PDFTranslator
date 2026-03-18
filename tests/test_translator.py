@@ -35,7 +35,7 @@ def test_translator_gpt_call(mock_openai, dummy_pdf):
     mock_client.chat.completions.create.return_value = mock_response
 
     # Initialize and translate
-    translator = Translator(model_type="gpt-5-mini", api_key="test_key")
+    translator = Translator(model_type="gpt-5.4-mini", api_key="test_key")
     result = translator.translate_page(dummy_pdf, target_language="Japanese")
 
     # Assertions
@@ -81,7 +81,7 @@ def test_translator_gemini_call(mock_genai_client, dummy_pdf):
 def test_translator_prompt_with_context():
     # Only test the internal get_prompt method to avoid making actual API calls
     translator = Translator(
-        model_type="gpt-5-mini", api_key="dummy"
+        model_type="gpt-5.4-mini", api_key="dummy"
     )  # Need dummy key just to initialize
 
     context = "This is the end of the previous page."

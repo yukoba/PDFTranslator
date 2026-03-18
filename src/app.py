@@ -103,7 +103,7 @@ class PDFTranslatorApp(ctk.CTk):
         self.model_menu = ctk.CTkOptionMenu(
             self.llm_frame,
             variable=self.model_var,
-            values=["gemini-3-flash-preview", "gpt-5-mini"],
+            values=["gemini-3-flash-preview", "gpt-5.4-mini"],
             command=self._on_model_change,
         )
         self.model_menu.grid(row=0, column=1, padx=10, pady=5, sticky="w")
@@ -156,7 +156,7 @@ class PDFTranslatorApp(ctk.CTk):
     def _load_config(self):
         self.tgt_lang_var.set(self.config_manager.get("target_language", "Japanese"))
 
-        saved_model = self.config_manager.get("selected_model", "gpt-5-mini")
+        saved_model = self.config_manager.get("selected_model", "gpt-5.4-mini")
         self.model_var.set(saved_model)
 
         self._load_api_key(saved_model)

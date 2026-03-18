@@ -54,7 +54,7 @@ def test_config_load_existing(mock_config_dir):
 def test_get_api_key(mock_get_password, mock_config_dir):
     mock_get_password.return_value = "my_secret_key"
     config = ConfigManager()
-    key = config.get_api_key("gpt-5-mini")
+    key = config.get_api_key("gpt-5.4-mini")
 
     assert key == "my_secret_key"
     mock_get_password.assert_called_once_with(APP_NAME, "OpenAI")

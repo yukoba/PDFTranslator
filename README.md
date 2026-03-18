@@ -2,7 +2,7 @@
 
 ![screenshotApp](docs/imgs/screenshotApp.png)
 
-Gemini 3 Flash もしくは OpenAI GPT-5 mini を使用して、PDFファイルを翻訳するデスクトップアプリです。1ページ単位で翻訳してつなげています。PDFファイルの拡張子 .pdf を .md に変えて Markdown 形式で保存します。その際、元の Markdown ファイルに追記します。
+Gemini 3 Flash もしくは OpenAI GPT-5.4 mini を使用して、PDFファイルを翻訳するデスクトップアプリです。1ページ単位で翻訳してつなげています。PDFファイルの拡張子 .pdf を .md に変えて Markdown 形式で保存します。その際、元の Markdown ファイルに追記します。
 
 ![screenshotObsidian](docs/imgs/screenshotObsidian.png)
 

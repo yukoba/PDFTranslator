@@ -4,11 +4,9 @@ from typing import Optional, Literal
 from google import genai
 from openai import OpenAI
 
-ModelType = Literal["gemini-3-flash-preview", "gpt-5.4-mini"]
-
 
 class Translator:
-    def __init__(self, model_type: ModelType, api_key: str):
+    def __init__(self, model_type: str, api_key: str):
         self.model_type = model_type
         self.api_key = api_key
 
@@ -83,10 +81,10 @@ class Translator:
         response = self.client.models.generate_content(  # type: ignore
             model=self.model_type,
             contents=[prompt, pdf_part],
-            config=genai.types.GenerateContentConfig(
-                thinking_config=genai.types.ThinkingConfig(
-                    thinking_level=genai.types.ThinkingLevel.LOW
-                )
-            ),
+            # config=genai.types.GenerateContentConfig(
+            #     thinking_config=genai.types.ThinkingConfig(
+            #         thinking_level=genai.types.ThinkingLevel.LOW
+            #     )
+            # ),
         )
         return str(response.text)

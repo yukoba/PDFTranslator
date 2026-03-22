@@ -2,11 +2,13 @@
 
 ![screenshotApp](docs/imgs/screenshotApp.png)
 
-Gemini 3 Flash もしくは OpenAI GPT-5.4 mini を使用して、PDFファイルを翻訳するデスクトップアプリです。1ページ単位で翻訳してつなげています。PDFファイルの拡張子 .pdf を .md に変えて Markdown 形式で保存します。その際、元の Markdown ファイルに追記します。
+Google Gemini もしくは OpenAI GPT を使用して、PDFファイルを翻訳するデスクトップアプリです。1ページ単位で翻訳してつなげています。PDFファイルの拡張子 .pdf を .md に変えて Markdown 形式で保存します。その際、元の Markdown ファイルに追記します。
 
 ![screenshotObsidian](docs/imgs/screenshotObsidian.png)
 
 [Obsidian](https://obsidian.md/ja/) にて、翻訳した Markdown と元の PDF を左右に並べて表示するのがお勧めです。Markdown 側にコメントを加筆したり文章を修正したりできるのが便利です。
+
+モデルは Gemini Flash がお勧めです。ページ内容によって変わりますが、Gemini Flash は1ページ15秒程度、Gemini Proは1ページ1分程度翻訳に時間がかかります。
 
 ## インストール方法
 Python で OS 非依存のプログラムですが、Windows のインストーラーが https://github.com/yukoba/PDFTranslator/releases にあります。

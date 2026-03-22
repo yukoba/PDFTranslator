@@ -2,7 +2,6 @@ import base64
 from typing import Optional, Literal
 
 from google import genai
-from google.genai.types import ThinkingLevel, Part
 from openai import OpenAI
 
 ModelType = Literal["gemini-3-flash-preview", "gpt-5.4-mini"]
@@ -59,7 +58,7 @@ class Translator:
         base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
 
         response = self.client.chat.completions.create(  # type: ignore
-            model="gpt-5.4-mini",
+            model=self.model_type,
             messages=[
                 {
                     "role": "user",
@@ -80,13 +79,13 @@ class Translator:
         return str(response.choices[0].message.content or "")
 
     def _translate_with_gemini(self, pdf_bytes: bytes, prompt: str) -> str:
-        pdf_part = Part.from_bytes(data=pdf_bytes, mime_type="application/pdf")
+        pdf_part = genai.types.Part.from_bytes(data=pdf_bytes, mime_type="application/pdf")
         response = self.client.models.generate_content(  # type: ignore
-            model="gemini-3-flash-preview",
+            model=self.model_type,
             contents=[prompt, pdf_part],
             config=genai.types.GenerateContentConfig(
                 thinking_config=genai.types.ThinkingConfig(
-                    thinking_level=ThinkingLevel.LOW
+                    thinking_level=genai.types.ThinkingLevel.LOW
                 )
             ),
         )

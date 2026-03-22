@@ -3,7 +3,7 @@ name = "pdftranslator"
 version = "1.4.0"
 description = "PDFを英語から日本語に翻訳"
 readme = "README.md"
-requires-python = "==3.12.*"
+requires-python = ">=3.14"
 dependencies = [
     "customtkinter>=5.2.2",
     "google-genai>=1.66.0",

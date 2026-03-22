@@ -25,32 +25,32 @@ class PDFTranslatorApp(ctk.CTk):
         self._load_config()
 
     def _create_widgets(self):
+        label_width = 100
+
         # 1. PDF File Selection
         self.file_frame = ctk.CTkFrame(self)
         self.file_frame.pack(pady=10, padx=20, fill="x")
+        self.file_frame.grid_columnconfigure(1, weight=1)
 
-        self.file_label = ctk.CTkLabel(self.file_frame, text="PDF File:")
-        self.file_label.pack(side="left", padx=10)
+        self.file_label = ctk.CTkLabel(self.file_frame, text="PDF File:", width=label_width, anchor="e")
+        self.file_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.file_path_var = ctk.StringVar()
         self.file_entry = ctk.CTkEntry(
             self.file_frame,
             textvariable=self.file_path_var,
-            width=350,
             state="readonly",
         )
-        self.file_entry.pack(side="left", padx=10)
+        self.file_entry.grid(row=0, column=1, padx=10, pady=5, sticky="ew")
 
-        self.browse_btn = ctk.CTkButton(
-            self.file_frame, text="Browse", command=self._browse_file, width=80
-        )
-        self.browse_btn.pack(side="left", padx=10)
+        self.browse_btn = ctk.CTkButton(self.file_frame, text="Browse", command=self._browse_file, width=80)
+        self.browse_btn.grid(row=0, column=2, padx=10, pady=5, sticky="w")
 
         # 2. Language Selection
         self.lang_frame = ctk.CTkFrame(self)
         self.lang_frame.pack(pady=10, padx=20, fill="x")
 
-        self.tgt_lang_label = ctk.CTkLabel(self.lang_frame, text="Target Language:")
+        self.tgt_lang_label = ctk.CTkLabel(self.lang_frame, text="Target Language:", width=label_width, anchor="e")
         self.tgt_lang_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.tgt_lang_var = ctk.StringVar(value="Japanese")
@@ -62,9 +62,10 @@ class PDFTranslatorApp(ctk.CTk):
         # 3. Page Range
         self.page_frame = ctk.CTkFrame(self)
         self.page_frame.pack(pady=10, padx=20, fill="x")
+        self.page_frame.grid_columnconfigure(5, weight=1)
 
-        self.page_label = ctk.CTkLabel(self.page_frame, text="Page Range:")
-        self.page_label.pack(side="left", padx=10)
+        self.page_label = ctk.CTkLabel(self.page_frame, text="Page Range:", width=label_width, anchor="e")
+        self.page_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.start_page_var = ctk.StringVar()
         self.start_page_entry = ctk.CTkEntry(
@@ -73,10 +74,10 @@ class PDFTranslatorApp(ctk.CTk):
             width=50,
             placeholder_text="Start",
         )
-        self.start_page_entry.pack(side="left", padx=5)
+        self.start_page_entry.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
         self.to_label = ctk.CTkLabel(self.page_frame, text="to")
-        self.to_label.pack(side="left", padx=5)
+        self.to_label.grid(row=0, column=2, padx=5, pady=5)
 
         self.end_page_var = ctk.StringVar()
         self.end_page_entry = ctk.CTkEntry(
@@ -85,18 +86,16 @@ class PDFTranslatorApp(ctk.CTk):
             width=50,
             placeholder_text="End",
         )
-        self.end_page_entry.pack(side="left", padx=5)
+        self.end_page_entry.grid(row=0, column=3, padx=5, pady=5, sticky="w")
 
-        self.page_info_label = ctk.CTkLabel(
-            self.page_frame, text="(Leave empty for all pages)", text_color="gray"
-        )
-        self.page_info_label.pack(side="left", padx=10)
+        self.page_info_label = ctk.CTkLabel(self.page_frame, text="(Leave empty for all pages)", text_color="gray")
+        self.page_info_label.grid(row=0, column=4, padx=10, pady=5, sticky="w")
 
         # 4. LLM Selection & API Key
         self.llm_frame = ctk.CTkFrame(self)
         self.llm_frame.pack(pady=10, padx=20, fill="x")
 
-        self.model_label = ctk.CTkLabel(self.llm_frame, text="LLM Model:")
+        self.model_label = ctk.CTkLabel(self.llm_frame, text="LLM Model:", width=label_width, anchor="e")
         self.model_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.model_var = ctk.StringVar(value="gemini-3-flash-preview")
@@ -108,13 +107,11 @@ class PDFTranslatorApp(ctk.CTk):
         )
         self.model_menu.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
-        self.api_key_label = ctk.CTkLabel(self.llm_frame, text="API Key:")
+        self.api_key_label = ctk.CTkLabel(self.llm_frame, text="API Key:", width=label_width, anchor="e")
         self.api_key_label.grid(row=1, column=0, padx=10, pady=5, sticky="e")
 
         self.api_key_var = ctk.StringVar()
-        self.api_key_entry = ctk.CTkEntry(
-            self.llm_frame, textvariable=self.api_key_var, width=350, show="*"
-        )
+        self.api_key_entry = ctk.CTkEntry(self.llm_frame, textvariable=self.api_key_var, width=350, show="*")
         self.api_key_entry.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
         # 5. Output Preview

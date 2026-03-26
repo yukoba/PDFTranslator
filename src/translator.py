@@ -1,5 +1,5 @@
 import base64
-from typing import Optional, Literal
+from typing import Optional
 
 from google import genai
 from openai import OpenAI
@@ -20,8 +20,14 @@ class Translator:
     def _get_prompt(
             self, target_language: str, previous_context: Optional[str] = None
     ) -> str:
+        match target_language:
+            case "English":
+                target_langeuage_prompt = "英語"
+            case _:
+                target_langeuage_prompt = "だ・である調の日本語"
+
         base_prompt = (
-            f"提供されたPDFページの内容を読み取り、指定された翻訳先の言語（{target_language}）に翻訳してください。"
+            f"提供されたPDFページの内容を読み取り、{target_langeuage_prompt}に翻訳してください。"
             "出力はMarkdown形式とし、見出し、段落、箇条書き、数式、表などの論理構造を可能な限り維持してください。"
             "応答には翻訳結果だけを含めてください。"
         )

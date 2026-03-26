@@ -21,10 +21,12 @@ class Translator:
             self, target_language: str, previous_context: Optional[str] = None
     ) -> str:
         match target_language:
+            case "Japanese":
+                target_langeuage_prompt = "だ・である調の日本語"
             case "English":
                 target_langeuage_prompt = "英語"
             case _:
-                target_langeuage_prompt = "だ・である調の日本語"
+                target_langeuage_prompt = target_language
 
         base_prompt = (
             f"提供されたPDFページの内容を読み取り、{target_langeuage_prompt}に翻訳してください。"

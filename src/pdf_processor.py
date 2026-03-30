@@ -30,9 +30,7 @@ class PDFProcessor:
             raise RuntimeError("PDF document is not opened. Use 'with' statement.")
 
         if page_number < 1 or page_number > len(self.doc):
-            raise ValueError(
-                f"Invalid page number {page_number}. Must be between 1 and {len(self.doc)}."
-            )
+            raise ValueError(f"Invalid page number {page_number}. Must be between 1 and {len(self.doc)}.")
 
         new_doc = fitz.open()
         new_doc.insert_pdf(self.doc, from_page=page_number - 1, to_page=page_number - 1)
@@ -40,9 +38,7 @@ class PDFProcessor:
         new_doc.close()
         return pdf_bytes
 
-    def extract_pages_as_pdfs(
-            self, start_page: int = 1, end_page: Optional[int] = None
-    ):
+    def extract_pages_as_pdfs(self, start_page: int = 1, end_page: Optional[int] = None):
         """
         Generator that yields (page_number, pdf_bytes) for the specified range.
         """

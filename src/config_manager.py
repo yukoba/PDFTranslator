@@ -44,7 +44,7 @@ class ConfigManager:
                     loaded_config = json.load(f)
                     # Update default config with loaded values
                     default_config.update(loaded_config)
-            except (json.JSONDecodeError, IOError):
+            except json.JSONDecodeError, IOError:
                 # If the file is corrupted, return the default config
                 pass
 

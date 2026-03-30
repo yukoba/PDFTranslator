@@ -46,10 +46,7 @@ def test_translator_gpt_call(mock_openai, dummy_pdf):
     call_args = mock_client.chat.completions.create.call_args[1]
     messages = call_args["messages"]
     assert len(messages) == 1
-    assert (
-            "だ・である調の日本語に翻訳してください。"
-            in messages[0]["content"][0]["text"]
-    )
+    assert "だ・である調の日本語に翻訳してください。" in messages[0]["content"][0]["text"]
 
 
 @patch("translator.genai.Client")
@@ -72,24 +69,14 @@ def test_translator_gemini_call(mock_genai_client, dummy_pdf):
     # Check if prompt was passed correctly
     call_args = mock_client_instance.models.generate_content.call_args[1]
     assert call_args["model"] == "gemini-3-flash-preview"
-    assert (
-            "英語に翻訳してください。"
-            in call_args["contents"][0]
-    )
+    assert "英語に翻訳してください。" in call_args["contents"][0]
 
 
 def test_translator_prompt_with_context():
     # Only test the internal get_prompt method to avoid making actual API calls
-    translator = Translator(
-        model_type="gpt-5.4-mini", api_key="dummy"
-    )  # Need dummy key just to initialize
+    translator = Translator(model_type="gpt-5.4-mini", api_key="dummy")  # Need dummy key just to initialize
 
     context = "This is the end of the previous page."
-    prompt = translator._get_prompt(
-        target_language="Japanese", previous_context=context
-    )
+    prompt = translator._get_prompt(target_language="Japanese", previous_context=context)
 
-    assert (
-            "前のページからの続きです。以下の文脈を考慮して翻訳してください：\nThis is the end of the previous page."
-            in prompt
-    )
+    assert "前のページからの続きです。以下の文脈を考慮して翻訳してください：\nThis is the end of the previous page." in prompt

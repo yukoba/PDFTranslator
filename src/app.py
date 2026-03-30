@@ -34,9 +34,7 @@ class PDFTranslatorApp(ctk.CTk):
         self.file_frame.pack(pady=10, padx=20, fill="x")
         self.file_frame.grid_columnconfigure(1, weight=1)
 
-        self.file_label = ctk.CTkLabel(
-            self.file_frame, text="PDF File:", width=label_width, anchor="e"
-        )
+        self.file_label = ctk.CTkLabel(self.file_frame, text="PDF File:", width=label_width, anchor="e")
         self.file_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.file_path_var = ctk.StringVar()
@@ -47,24 +45,18 @@ class PDFTranslatorApp(ctk.CTk):
         )
         self.file_entry.grid(row=0, column=1, padx=10, pady=5, sticky="ew")
 
-        self.browse_btn = ctk.CTkButton(
-            self.file_frame, text="Browse", command=self._browse_file, width=80
-        )
+        self.browse_btn = ctk.CTkButton(self.file_frame, text="Browse", command=self._browse_file, width=80)
         self.browse_btn.grid(row=0, column=2, padx=10, pady=5, sticky="w")
 
         # 2. Language Selection
         self.lang_frame = ctk.CTkFrame(self)
         self.lang_frame.pack(pady=10, padx=20, fill="x")
 
-        self.tgt_lang_label = ctk.CTkLabel(
-            self.lang_frame, text="Target Language:", width=label_width, anchor="e"
-        )
+        self.tgt_lang_label = ctk.CTkLabel(self.lang_frame, text="Target Language:", width=label_width, anchor="e")
         self.tgt_lang_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.tgt_lang_var = ctk.StringVar(value="Japanese")
-        self.tgt_lang_menu = ctk.CTkOptionMenu(
-            self.lang_frame, variable=self.tgt_lang_var, values=["Japanese", "English"]
-        )
+        self.tgt_lang_menu = ctk.CTkOptionMenu(self.lang_frame, variable=self.tgt_lang_var, values=["Japanese", "English"])
         self.tgt_lang_menu.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
         # 3. Page Range
@@ -72,9 +64,7 @@ class PDFTranslatorApp(ctk.CTk):
         self.page_frame.pack(pady=10, padx=20, fill="x")
         self.page_frame.grid_columnconfigure(5, weight=1)
 
-        self.page_label = ctk.CTkLabel(
-            self.page_frame, text="Page Range:", width=label_width, anchor="e"
-        )
+        self.page_label = ctk.CTkLabel(self.page_frame, text="Page Range:", width=label_width, anchor="e")
         self.page_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.start_page_var = ctk.StringVar()
@@ -98,18 +88,14 @@ class PDFTranslatorApp(ctk.CTk):
         )
         self.end_page_entry.grid(row=0, column=3, padx=5, pady=5, sticky="w")
 
-        self.page_info_label = ctk.CTkLabel(
-            self.page_frame, text="(Leave empty for all pages)", text_color="gray"
-        )
+        self.page_info_label = ctk.CTkLabel(self.page_frame, text="(Leave empty for all pages)", text_color="gray")
         self.page_info_label.grid(row=0, column=4, padx=10, pady=5, sticky="w")
 
         # 4. LLM Selection & API Key
         self.llm_frame = ctk.CTkFrame(self)
         self.llm_frame.pack(pady=10, padx=20, fill="x")
 
-        self.model_label = ctk.CTkLabel(
-            self.llm_frame, text="LLM Model:", width=label_width, anchor="e"
-        )
+        self.model_label = ctk.CTkLabel(self.llm_frame, text="LLM Model:", width=label_width, anchor="e")
         self.model_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
         self.model_var = ctk.StringVar(value="gemini-3-flash-preview")
@@ -126,15 +112,11 @@ class PDFTranslatorApp(ctk.CTk):
         )
         self.model_menu.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
-        self.api_key_label = ctk.CTkLabel(
-            self.llm_frame, text="API Key:", width=label_width, anchor="e"
-        )
+        self.api_key_label = ctk.CTkLabel(self.llm_frame, text="API Key:", width=label_width, anchor="e")
         self.api_key_label.grid(row=1, column=0, padx=10, pady=5, sticky="e")
 
         self.api_key_var = ctk.StringVar()
-        self.api_key_entry = ctk.CTkEntry(
-            self.llm_frame, textvariable=self.api_key_var, width=350, show="*"
-        )
+        self.api_key_entry = ctk.CTkEntry(self.llm_frame, textvariable=self.api_key_var, width=350, show="*")
         self.api_key_entry.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
         # 5. Output Preview
@@ -162,23 +144,17 @@ class PDFTranslatorApp(ctk.CTk):
         self.exec_btn.pack(side="left", padx=10)
 
         self.progress_var = ctk.DoubleVar(value=0.0)
-        self.progress_bar = ctk.CTkProgressBar(
-            self.action_frame, variable=self.progress_var, width=300
-        )
+        self.progress_bar = ctk.CTkProgressBar(self.action_frame, variable=self.progress_var, width=300)
         self.progress_bar.pack(side="left", padx=10, pady=10)
 
         self.status_var = ctk.StringVar(value="Ready")
-        self.status_label = ctk.CTkLabel(
-            self.action_frame, textvariable=self.status_var
-        )
+        self.status_label = ctk.CTkLabel(self.action_frame, textvariable=self.status_var)
         self.status_label.pack(side="left", padx=10)
 
     def _load_config(self):
         self.tgt_lang_var.set(self.config_manager.get("target_language", "Japanese"))
 
-        saved_model = self.config_manager.get(
-            "selected_model", "gemini-3-flash-preview"
-        )
+        saved_model = self.config_manager.get("selected_model", "gemini-3-flash-preview")
         self.model_var.set(saved_model)
 
         self._load_api_key(saved_model)
@@ -208,9 +184,7 @@ class PDFTranslatorApp(ctk.CTk):
         self._load_api_key(new_model)
 
     def _browse_file(self):
-        initial_dir = self.config_manager.get(
-            "last_opened_folder", os.path.expanduser("~")
-        )
+        initial_dir = self.config_manager.get("last_opened_folder", os.path.expanduser("~"))
         file_path = filedialog.askopenfilename(
             initialdir=initial_dir,
             title="Select PDF File",
@@ -300,17 +274,13 @@ class PDFTranslatorApp(ctk.CTk):
         thread.daemon = True
         thread.start()
 
-    def _translation_worker(
-            self, pdf_path, md_path, model_name, api_key, target_lang, start_page, end_page
-    ):
+    def _translation_worker(self, pdf_path, md_path, model_name, api_key, target_lang, start_page, end_page):
         try:
             translator = Translator(model_type=model_name, api_key=api_key)  # type: ignore
 
             with PDFProcessor(pdf_path) as proc:
                 total_pages = proc.get_page_count()
-                actual_end_page = (
-                    end_page if end_page and end_page <= total_pages else total_pages
-                )
+                actual_end_page = end_page if end_page and end_page <= total_pages else total_pages
 
                 if start_page > actual_end_page or start_page < 1:
                     self.after(
@@ -325,17 +295,11 @@ class PDFTranslatorApp(ctk.CTk):
                 processed_count = 0
                 previous_context = None
 
-                self.after(
-                    0, self.status_var.set, f"Processing {pages_to_process} pages..."
-                )
+                self.after(0, self.status_var.set, f"Processing {pages_to_process} pages...")
 
-                for page_num, pdf_bytes in proc.extract_pages_as_pdfs(
-                        start_page, actual_end_page
-                ):
+                for page_num, pdf_bytes in proc.extract_pages_as_pdfs(start_page, actual_end_page):
                     if self.stop_event.is_set():
-                        self.after(
-                            0, self._log_message, "\nTranslation stopped by user."
-                        )
+                        self.after(0, self._log_message, "\nTranslation stopped by user.")
                         self.after(0, self.status_var.set, "Stopped")
                         return
 
@@ -360,11 +324,7 @@ class PDFTranslatorApp(ctk.CTk):
                         )
 
                         # Extract the last part of the translation for context (e.g., last 200 characters)
-                        previous_context = (
-                            translated_markdown[-200:]
-                            if len(translated_markdown) > 200
-                            else translated_markdown
-                        )
+                        previous_context = translated_markdown[-200:] if len(translated_markdown) > 200 else translated_markdown
 
                     except Exception as e:
                         self.after(
@@ -379,9 +339,7 @@ class PDFTranslatorApp(ctk.CTk):
                     self.after(0, self.progress_var.set, progress)
 
                     if self.stop_event.is_set():
-                        self.after(
-                            0, self._log_message, "\nTranslation stopped by user."
-                        )
+                        self.after(0, self._log_message, "\nTranslation stopped by user.")
                         self.after(0, self.status_var.set, "Stopped")
                         return
 

@@ -17,9 +17,7 @@ class Translator:
         else:
             raise ValueError(f"Unsupported model type: {model_type}")
 
-    def _get_prompt(
-            self, target_language: str, previous_context: Optional[str] = None
-    ) -> str:
+    def _get_prompt(self, target_language: str, previous_context: Optional[str] = None) -> str:
         match target_language:
             case "Japanese":
                 target_langeuage_prompt = "だ・である調の日本語"
@@ -38,18 +36,15 @@ class Translator:
             base_prompt += "Markdown内のTeXは $...$ で囲んでください。"
 
         if previous_context:
-            base_prompt += (
-                f"\n\n前のページからの続きです。以下の文脈を考慮して翻訳してください：\n"
-                f"{previous_context}"
-            )
+            base_prompt += f"\n\n前のページからの続きです。以下の文脈を考慮して翻訳してください：\n" f"{previous_context}"
 
         return base_prompt
 
     def translate_page(
-            self,
-            pdf_bytes: bytes,
-            target_language: str,
-            previous_context: Optional[str] = None,
+        self,
+        pdf_bytes: bytes,
+        target_language: str,
+        previous_context: Optional[str] = None,
     ) -> str:
         prompt = self._get_prompt(target_language, previous_context)
 

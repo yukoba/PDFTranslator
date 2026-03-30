@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="sdkName" value="Python 3.14 (PDFTranslator)" />
+    <option name="sdkName" value="uv (PDFTranslator)" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="Python 3.14 (PDFTranslator)" project-jdk-type="Python SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

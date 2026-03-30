@@ -47,7 +47,7 @@ def test_translator_gpt_call(mock_openai, dummy_pdf):
     messages = call_args["messages"]
     assert len(messages) == 1
     assert (
-            "指定された翻訳先の言語（Japanese）に翻訳してください。"
+            "だ・である調の日本語に翻訳してください。"
             in messages[0]["content"][0]["text"]
     )
 
@@ -73,7 +73,7 @@ def test_translator_gemini_call(mock_genai_client, dummy_pdf):
     call_args = mock_client_instance.models.generate_content.call_args[1]
     assert call_args["model"] == "gemini-3-flash-preview"
     assert (
-            "指定された翻訳先の言語（English）に翻訳してください。"
+            "英語に翻訳してください。"
             in call_args["contents"][0]
     )
 

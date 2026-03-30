@@ -5,7 +5,7 @@
     <option name="enabledOnSave" value="true" />
     <option name="sdkName" value="uv (PDFTranslator)" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="uv (PDFTranslator)" project-jdk-type="Python SDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

@@ -59,7 +59,7 @@ def test_translator_gemini_call(mock_genai_client, dummy_pdf):
     mock_client_instance.models.generate_content.return_value = mock_response
 
     # Initialize and translate
-    translator = Translator(model_type="gemini-3-flash-preview", api_key="test_key")
+    translator = Translator(model_type="gemini-3.5-flash", api_key="test_key")
     result = translator.translate_page(dummy_pdf, target_language="English")
 
     # Assertions
@@ -68,7 +68,7 @@ def test_translator_gemini_call(mock_genai_client, dummy_pdf):
 
     # Check if prompt was passed correctly
     call_args = mock_client_instance.models.generate_content.call_args[1]
-    assert call_args["model"] == "gemini-3-flash-preview"
+    assert call_args["model"] == "gemini-3.5-flash"
     assert "英語に翻訳してください。" in call_args["contents"][0]
 
 

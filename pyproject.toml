@@ -25,3 +25,4 @@ testpaths = ["tests"]
 
 [tool.black]
 line-length = 140
+target-version = ['py314']

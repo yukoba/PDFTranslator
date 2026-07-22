@@ -35,7 +35,7 @@ class ConfigManager:
         default_config = {
             "last_opened_folder": "",
             "target_language": "Japanese",
-            "selected_model": "gemini-3.5-flash",
+            "selected_model": "gemini-flash-latest",
         }
 
         if self.config_path.exists():

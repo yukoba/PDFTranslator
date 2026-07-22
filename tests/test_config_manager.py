@@ -16,7 +16,7 @@ def mock_config_dir(tmp_path):
 def test_config_initialization_defaults(mock_config_dir):
     config = ConfigManager()
     assert config.get("target_language") == "Japanese"
-    assert config.get("selected_model") == "gemini-3.5-flash"
+    assert config.get("selected_model") == "gemini-flash-latest"
     assert config.get("last_opened_folder") == ""
     assert mock_config_dir.exists()
     assert (mock_config_dir / "config.json").exists() == False  # Only saved when changed
@@ -24,9 +24,9 @@ def test_config_initialization_defaults(mock_config_dir):
 
 def test_config_set_and_save(mock_config_dir):
     config = ConfigManager()
-    config.set("selected_model", "gemini-3.5-flash")
+    config.set("selected_model", "gemini-flash-latest")
 
-    assert config.get("selected_model") == "gemini-3.5-flash"
+    assert config.get("selected_model") == "gemini-flash-latest"
 
     # Check if it was saved to file
     config_file = mock_config_dir / "config.json"
@@ -34,7 +34,7 @@ def test_config_set_and_save(mock_config_dir):
 
     with open(config_file, "r", encoding="utf-8") as f:
         data = json.load(f)
-        assert data["selected_model"] == "gemini-3.5-flash"
+        assert data["selected_model"] == "gemini-flash-latest"
 
 
 def test_config_load_existing(mock_config_dir):
@@ -54,7 +54,7 @@ def test_config_load_existing(mock_config_dir):
 def test_get_api_key(mock_get_password, mock_config_dir):
     mock_get_password.return_value = "my_secret_key"
     config = ConfigManager()
-    key = config.get_api_key("gpt-5.4-mini")
+    key = config.get_api_key("gpt-5.6-luna")
 
     assert key == "my_secret_key"
     mock_get_password.assert_called_once_with(APP_NAME, "OpenAI")
@@ -63,6 +63,6 @@ def test_get_api_key(mock_get_password, mock_config_dir):
 @patch("config_manager.keyring.set_password")
 def test_set_api_key(mock_set_password, mock_config_dir):
     config = ConfigManager()
-    config.set_api_key("gemini-3.5-flash", "new_secret_key")
+    config.set_api_key("gemini-flash-latest", "new_secret_key")
 
     mock_set_password.assert_called_once_with(APP_NAME, "Gemini", "new_secret_key")

@@ -98,15 +98,15 @@ class PDFTranslatorApp(ctk.CTk):
         self.model_label = ctk.CTkLabel(self.llm_frame, text="LLM Model:", width=label_width, anchor="e")
         self.model_label.grid(row=0, column=0, padx=10, pady=5, sticky="e")
 
-        self.model_var = ctk.StringVar(value="gemini-3.5-flash")
+        self.model_var = ctk.StringVar(value="gemini-flash-latest")
         self.model_menu = ctk.CTkOptionMenu(
             self.llm_frame,
             variable=self.model_var,
             values=[
-                "gemini-3.5-flash",
-                "gemini-3.1-pro-preview",
-                "gpt-5.4-mini",
-                "gpt-5.5",
+                "gemini-flash-latest",
+                "gemini-pro-latest",
+                "gpt-5.6-luna",
+                "gpt-5.6-terra",
             ],
             command=self._on_model_change,
         )
@@ -154,7 +154,7 @@ class PDFTranslatorApp(ctk.CTk):
     def _load_config(self):
         self.tgt_lang_var.set(self.config_manager.get("target_language", "Japanese"))
 
-        saved_model = self.config_manager.get("selected_model", "gemini-3.5-flash")
+        saved_model = self.config_manager.get("selected_model", "gemini-flash-latest")
         self.model_var.set(saved_model)
 
         self._load_api_key(saved_model)

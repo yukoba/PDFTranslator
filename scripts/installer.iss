@@ -7,6 +7,7 @@ OutputDir=.\dist\installer
 OutputBaseFilename=PDFTranslator_Setup
 Compression=lzma
 SolidCompression=yes
+SetupArchitecture=x64
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 

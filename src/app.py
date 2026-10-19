@@ -104,9 +104,9 @@ class PDFTranslatorApp(ctk.CTk):
             variable=self.model_var,
             values=[
                 "gemini-flash-latest",
-                "gemini-pro-latest",
+                "gemini-4-argon",
                 "gpt-6-luna",
-                "gpt-6-sol",
+                "gpt-6.1-sol",
             ],
             command=self._on_model_change,
         )

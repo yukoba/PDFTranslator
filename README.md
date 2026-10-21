@@ -1,3 +1,7 @@
+本アプリを使用するより、2026年10月21日現在は OpenCode で `@foo.pdf の最初の3ページを英語から だ・である調の日本語に翻訳して @foo.md に書いてください。` というプロンプトで Gemini Flash を使用した方が良いです。
+
+---
+
 # PDF翻訳デスクトップアプリ
 
 ![screenshotApp](docs/imgs/screenshotApp.png)
